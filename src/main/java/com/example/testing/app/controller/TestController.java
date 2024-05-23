@@ -40,7 +40,6 @@ public class TestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTest(@PathVariable Integer id) {
-        testService.deleteTest(id);
-        return ResponseEntity.noContent().build();
+        return testService.deleteTest(id);
     }
 }

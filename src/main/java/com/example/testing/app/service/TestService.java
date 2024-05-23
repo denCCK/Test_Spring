@@ -33,8 +33,8 @@ public class TestService {
     }
 
     public ResponseEntity<Test> updateTest(Integer id, Test test) {
-        Optional<Test> existingUser = testRepository.findById(id);
-        if (existingUser.isPresent()) {
+        Optional<Test> existingTest = testRepository.findById(id);
+        if (existingTest.isPresent()) {
             test.setId(id);
             return ResponseEntity.ok(testRepository.save(test));
         } else {

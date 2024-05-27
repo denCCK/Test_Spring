@@ -2,7 +2,6 @@ package com.example.testing.app.controller;
 
 import com.example.testing.app.model.Answer;
 import com.example.testing.app.service.AnswerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -49,7 +48,7 @@ public class AnswerController {
     }
 
     @DeleteMapping("/question/{questionId}")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Integer questionId) {
+    public ResponseEntity<Void> deleteAnswersByQuestionId(@PathVariable Integer questionId) {
         answerService.deleteAnswersByQuestionId(questionId);
         return ResponseEntity.noContent().build();
     }

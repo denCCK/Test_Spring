@@ -1,6 +1,7 @@
 package com.example.testing.app.service;
 
 import com.example.testing.app.dto.TestsessionDTO;
+import com.example.testing.app.model.Grade;
 import com.example.testing.app.model.Testsession;
 import com.example.testing.app.repository.TestRepository;
 import com.example.testing.app.repository.TestsessionRepository;
@@ -34,17 +35,17 @@ public class TestsessionService {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    public TestsessionDTO createTestSession(TestsessionDTO testSessionDTO) {
-        Testsession testSession = convertToEntity(testSessionDTO);
-        return convertToDto(testSessionRepository.save(testSession));
+    public TestsessionDTO createTestSession(TestsessionDTO testsessionDTO) {
+        Testsession testsession = convertToEntity(testsessionDTO);
+        return convertToDto(testSessionRepository.save(testsession));
     }
 
-    public ResponseEntity<TestsessionDTO> updateTestSession(Integer id, TestsessionDTO testSessionDTO) {
+    public ResponseEntity<TestsessionDTO> updateTestSession(Integer id, TestsessionDTO testsessionDTO) {
         Optional<Testsession> existingTestSession = testSessionRepository.findById(id);
         if (existingTestSession.isPresent()) {
-            Testsession testSession = convertToEntity(testSessionDTO);
-            testSession.setId(id);
-            return ResponseEntity.ok(convertToDto(testSessionRepository.save(testSession)));
+            Testsession testsession = convertToEntity(testsessionDTO);
+            testsession.setId(id);
+            return ResponseEntity.ok(convertToDto(testSessionRepository.save(testsession)));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -71,7 +72,7 @@ public class TestsessionService {
         dto.setCreationDate(testSession.getCreationDate());
         dto.setLastChangeDate(testSession.getLastChangeDate());
 
-        dto.setGrade(testSession.getGrades());
+        //dto.setGrades(testSession.getGrades());
 
         return dto;
     }
@@ -89,7 +90,7 @@ public class TestsessionService {
         testSession.setCreationDate(dto.getCreationDate());
         testSession.setLastChangeDate(dto.getLastChangeDate());
 
-        testSession.setGrades(dto.getGrade());
+        //testSession.setGrades(dto.getGrades());
 
         return testSession;
     }

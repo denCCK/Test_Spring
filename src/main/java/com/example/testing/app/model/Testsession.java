@@ -44,10 +44,10 @@ public class Testsession {
     @Column(name = "last_change_date", nullable = false)
     private LocalDate lastChangeDate;
 
-    @OneToMany(mappedBy = "testsession")
+    @OneToMany(mappedBy = "testsession", cascade = CascadeType.ALL)
     private Set<Grade> grades = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "testsession")
+    @OneToMany(mappedBy = "testsession", cascade = CascadeType.ALL)
     private Set<TestsessionResult> testsessionResults = new LinkedHashSet<>();
 
 }

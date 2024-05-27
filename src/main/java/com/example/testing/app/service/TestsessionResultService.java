@@ -36,6 +36,13 @@ public class TestsessionResultService {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    public List<TestsessionResultDTO> getTestsessionResultsByTestsessionId(Integer testsessionId) {
+        return testsessionResultRepository.findByTestsessionId(testsessionId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+
     public TestsessionResultDTO createTestsessionResult(TestsessionResultDTO testsessionResultDTO) {
         TestsessionResult testsessionResult = convertToEntity(testsessionResultDTO);
         return convertToDto(testsessionResultRepository.save(testsessionResult));

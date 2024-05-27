@@ -2,6 +2,7 @@ package com.example.testing.app.service;
 
 import com.example.testing.app.dto.TestsessionQuestionResultDTO;
 import com.example.testing.app.model.TestsessionQuestionResult;
+import com.example.testing.app.repository.QuestionRepository;
 import com.example.testing.app.repository.TestsessionQuestionResultRepository;
 import com.example.testing.app.repository.TestsessionResultRepository;
 import org.springframework.beans.BeanUtils;
@@ -17,10 +18,12 @@ public class TestsessionQuestionResultService {
 
     private final TestsessionQuestionResultRepository testsessionQuestionResultRepository;
     private final TestsessionResultRepository testsessionResultRepository;
+    private final QuestionRepository questionRepository;
 
-    public TestsessionQuestionResultService(TestsessionQuestionResultRepository testsessionQuestionResultRepository, TestsessionResultRepository testsessionResultRepositoy) {
+    public TestsessionQuestionResultService(TestsessionQuestionResultRepository testsessionQuestionResultRepository, TestsessionResultRepository testsessionResultRepositoy, QuestionRepository questionRepository) {
         this.testsessionQuestionResultRepository = testsessionQuestionResultRepository;
         this.testsessionResultRepository = testsessionResultRepositoy;
+        this.questionRepository = questionRepository;
     }
 
     public List<TestsessionQuestionResultDTO> getAllTestsessionQuestionResults() {
@@ -33,6 +36,12 @@ public class TestsessionQuestionResultService {
         Optional<TestsessionQuestionResult> testsessionQuestionResult = testsessionQuestionResultRepository.findById(id);
         return testsessionQuestionResult.map(value -> ResponseEntity.ok(convertToDto(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    public List<TestsessionQuestionResultDTO> getQuestionResultsByTestsessionResultId(Integer testsessionResultId) {
+        return testsessionQuestionResultRepository.findByTestsessionResultId(testsessionResultId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     public TestsessionQuestionResultDTO createTestsessionQuestionResult(TestsessionQuestionResultDTO testsessionQuestionResultDTO) {
@@ -73,6 +82,7 @@ public class TestsessionQuestionResultService {
         TestsessionQuestionResult testsessionQuestionResult = new TestsessionQuestionResult();
         testsessionQuestionResult.setTestsessionResult(testsessionResultRepository.findById(dto.getTestsessionResultId()).orElse(null));
         BeanUtils.copyProperties(dto, testsessionQuestionResult);
+        testsessionQuestionResult.setQuestion(questionRepository.findById(dto.getQuestionId()).orElse(null));
         return testsessionQuestionResult;
     }
 }

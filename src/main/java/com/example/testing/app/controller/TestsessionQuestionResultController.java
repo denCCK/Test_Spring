@@ -27,6 +27,11 @@ public class TestsessionQuestionResultController {
         return testsessionQuestionResultService.getTestsessionQuestionResultById(id);
     }
 
+    @GetMapping("/testsession-result/{id}")
+    public List<TestsessionQuestionResultDTO> getQuestionResultsByTestsessionResultId(@PathVariable Integer id) {
+        return testsessionQuestionResultService.getQuestionResultsByTestsessionResultId(id);
+    }
+
     @PostMapping
     public TestsessionQuestionResultDTO createTestsessionQuestionResult(@RequestBody TestsessionQuestionResultDTO testsessionQuestionResultDTO) {
         return testsessionQuestionResultService.createTestsessionQuestionResult(testsessionQuestionResultDTO);

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "testsession"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "testsession"})
 @Getter
 @Setter
 @Entity

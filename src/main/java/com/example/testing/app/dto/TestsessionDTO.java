@@ -20,7 +20,8 @@ public class TestsessionDTO {
     private Integer testId;
     private LocalDate creationDate;
     private LocalDate lastChangeDate;
-    private Set<Grade> grade;
+
+    //private Set<Grade> grades;
 
 }
 

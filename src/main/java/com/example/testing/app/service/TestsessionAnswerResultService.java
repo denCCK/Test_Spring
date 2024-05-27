@@ -39,6 +39,13 @@ public class TestsessionAnswerResultService {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
+    public List<TestsessionAnswerResultDTO> getAnswerResultsByTestsessionResultId(Integer testsessionResultId) {
+        return answerResultRepository.findByTestsessionResultId(testsessionResultId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     public TestsessionAnswerResultDTO createAnswerResult(TestsessionAnswerResultDTO answerResultDTO) {
         TestsessionAnswerResult answerResult = convertToEntity(answerResultDTO);
         return convertToDto(answerResultRepository.save(answerResult));
@@ -80,6 +87,7 @@ public class TestsessionAnswerResultService {
         testsessionAnswerResult.setId(dto.getId());
         testsessionAnswerResult.setAnswer(answerRepository.findById(dto.getAnswerId()).orElse(null));
         testsessionAnswerResult.setTestsessionResult(sessionResultRepository.findById(dto.getTestsessionResultId()).orElse(null));
+        testsessionAnswerResult.setAnswerText(dto.getAnswerText());
         return testsessionAnswerResult;
     }
 }

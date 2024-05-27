@@ -28,6 +28,11 @@ public class TestsessionResultController {
         return testsessionResultService.getTestsessionResultById(id);
     }
 
+    @GetMapping("/testsession/{id}")
+    public List<TestsessionResultDTO> getTestsessionResultsByTestsessionId(@PathVariable Integer id) {
+        return testsessionResultService.getTestsessionResultsByTestsessionId(id);
+    }
+
     @PostMapping
     public TestsessionResultDTO createTestsessionResult(@RequestBody TestsessionResultDTO testsessionResultDTO) {
         return testsessionResultService.createTestsessionResult(testsessionResultDTO);

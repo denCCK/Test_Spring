@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -27,10 +28,10 @@ public class Test {
     private String testDescription;
 
     @Column(name = "creation_date", nullable = false)
-    private LocalDate creationDate;
+    private Timestamp creationDate;
 
     @Column(name = "last_change_date", nullable = false)
-    private LocalDate lastChangeDate;
+    private Timestamp lastChangeDate;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)

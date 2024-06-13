@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -25,14 +26,14 @@ public class Question {
     @Column(name = "question_name", nullable = false, length = 50)
     private String questionName;
 
-    @Column(name = "question_description", nullable = false, length = 50)
+    @Column(name = "question_description", nullable = false)
     private String questionDescription;
 
     @Column(name = "creation_date", nullable = false)
-    private LocalDate creationDate;
+    private Timestamp creationDate;
 
     @Column(name = "last_change_date", nullable = false)
-    private LocalDate lastChangeDate;
+    private Timestamp lastChangeDate;
 
     @Column(name = "question_point", nullable = false)
     private Float questionPoint;
@@ -52,5 +53,8 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Answer> answers = new LinkedHashSet<>();
+
+    @Column(name = "theme", nullable = false, length = 50)
+    private String theme;
 
 }

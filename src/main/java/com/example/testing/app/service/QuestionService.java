@@ -16,11 +16,9 @@ import java.util.Optional;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
-//    private final AnswerRepository answerRepository;
 
     public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository) {
         this.questionRepository = questionRepository;
-//        this.answerRepository = answerRepository;
     }
 
     public List<Question> getAllQuestions() {

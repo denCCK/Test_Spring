@@ -5,6 +5,7 @@ import com.example.testing.app.dto.TestsessionDTO;
 import com.example.testing.app.model.Testsession;
 import com.example.testing.app.model.TestsessionAnswerResult;
 import com.example.testing.app.repository.AnswerRepository;
+import com.example.testing.app.repository.QuestionRepository;
 import com.example.testing.app.repository.TestsessionAnswerResultRepository;
 import com.example.testing.app.repository.TestsessionResultRepository;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,16 @@ public class TestsessionAnswerResultService {
     private final TestsessionAnswerResultRepository answerResultRepository;
     private final TestsessionResultRepository sessionResultRepository;
     private final AnswerRepository answerRepository;
+    private final QuestionRepository questionRepository;
 
-    public TestsessionAnswerResultService(TestsessionAnswerResultRepository answerResultRepository, TestsessionResultRepository sessionResultRepository, AnswerRepository answerRepository) {
+    public TestsessionAnswerResultService(TestsessionAnswerResultRepository answerResultRepository,
+                                          TestsessionResultRepository sessionResultRepository,
+                                          AnswerRepository answerRepository,
+                                          QuestionRepository questionRepository) {
         this.answerResultRepository = answerResultRepository;
         this.sessionResultRepository = sessionResultRepository;
         this.answerRepository = answerRepository;
+        this.questionRepository = questionRepository;
     }
 
     public List<TestsessionAnswerResultDTO> getAllAnswersResult() {
@@ -76,8 +82,16 @@ public class TestsessionAnswerResultService {
         TestsessionAnswerResultDTO dto = new TestsessionAnswerResultDTO();
         dto.setId(testsessionAnswerResult.getId());
         dto.setAnswerId(testsessionAnswerResult.getAnswer().getId());
+        dto.setQuestionId(testsessionAnswerResult.getQuestion().getId());
         dto.setTestsessionResultId(testsessionAnswerResult.getTestsessionResult().getId());
         dto.setAnswerText(testsessionAnswerResult.getAnswerText());
+        dto.setAnswerImg(testsessionAnswerResult.getAnswerImg());
+        dto.setIsCorrect(testsessionAnswerResult.getIsCorrect());
+        dto.setComplianceText(testsessionAnswerResult.getComplianceText());
+        dto.setComplianceImg(testsessionAnswerResult.getComplianceImg());
+        dto.setAnswerFormula(testsessionAnswerResult.getAnswerFormula());
+        dto.setIsFormula(testsessionAnswerResult.getIsFormula());
+        dto.setIsComplianceFormula(testsessionAnswerResult.getIsComplianceFormula());
         return dto;
     }
 
@@ -86,8 +100,16 @@ public class TestsessionAnswerResultService {
         TestsessionAnswerResult testsessionAnswerResult = new TestsessionAnswerResult();
         testsessionAnswerResult.setId(dto.getId());
         testsessionAnswerResult.setAnswer(answerRepository.findById(dto.getAnswerId()).orElse(null));
+        testsessionAnswerResult.setQuestion(questionRepository.findById(dto.getQuestionId()).orElse(null));
         testsessionAnswerResult.setTestsessionResult(sessionResultRepository.findById(dto.getTestsessionResultId()).orElse(null));
         testsessionAnswerResult.setAnswerText(dto.getAnswerText());
+        testsessionAnswerResult.setAnswerImg(dto.getAnswerImg());
+        testsessionAnswerResult.setIsCorrect(dto.getIsCorrect());
+        testsessionAnswerResult.setComplianceText(dto.getComplianceText());
+        testsessionAnswerResult.setComplianceImg(dto.getComplianceImg());
+        testsessionAnswerResult.setAnswerFormula(dto.getAnswerFormula());
+        testsessionAnswerResult.setIsFormula(dto.getIsFormula());
+        testsessionAnswerResult.setIsComplianceFormula(dto.getIsComplianceFormula());
         return testsessionAnswerResult;
     }
 }

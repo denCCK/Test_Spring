@@ -36,4 +36,13 @@ public class Answer {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
+    @Column(name = "answer_formula", length = Integer.MAX_VALUE)
+    private String answerFormula;
+
+    @Column(name = "is_formula")
+    private Boolean isFormula;
+
+    @Column(name = "is_compliance_formula")
+    private Boolean isComplianceFormula;
+
 }

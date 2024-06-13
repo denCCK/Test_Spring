@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -35,10 +36,10 @@ public class TestsessionResult {
     private Float point;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private Timestamp startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
+    private Timestamp endDate;
 
     @OneToMany(mappedBy = "testsessionResult", cascade = CascadeType.ALL)
     private Set<TestsessionAnswerResult> testsessionAnswerResults = new LinkedHashSet<>();

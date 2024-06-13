@@ -1,7 +1,6 @@
 package com.example.testing.app.service;
 
 import com.example.testing.app.dto.TestsessionDTO;
-import com.example.testing.app.model.Grade;
 import com.example.testing.app.model.Testsession;
 import com.example.testing.app.repository.TestRepository;
 import com.example.testing.app.repository.TestsessionRepository;
@@ -71,27 +70,23 @@ public class TestsessionService {
         dto.setTestId(testSession.getTest().getId());
         dto.setCreationDate(testSession.getCreationDate());
         dto.setLastChangeDate(testSession.getLastChangeDate());
-
-        //dto.setGrades(testSession.getGrades());
-
+        dto.setQuestionsCount(testSession.getQuestionsCount());
+        dto.setTestsessionTime(testSession.getTestsessionTime());
         return dto;
     }
 
     private Testsession convertToEntity(TestsessionDTO dto) {
-
         Testsession testSession = new Testsession();
         testSession.setId(dto.getId());
         testSession.setTestsessionName(dto.getTestsessionName());
         testSession.setTestsessionDescription(dto.getTestsessionDescription());
         testSession.setStartDate(dto.getStartDate());
         testSession.setEndDate(dto.getEndDate());
-
         testSession.setTest(testRepository.findById(dto.getTestId()).orElse(null));
         testSession.setCreationDate(dto.getCreationDate());
         testSession.setLastChangeDate(dto.getLastChangeDate());
-
-        //testSession.setGrades(dto.getGrades());
-
+        testSession.setQuestionsCount(dto.getQuestionsCount());
+        testSession.setTestsessionTime(dto.getTestsessionTime());
         return testSession;
     }
 }

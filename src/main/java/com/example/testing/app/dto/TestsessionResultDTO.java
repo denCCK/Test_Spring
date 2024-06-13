@@ -3,6 +3,7 @@ package com.example.testing.app.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class TestsessionResultDTO {
     private String testsessionResultName;
     private String testsessionResultSurname;
     private Float point;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private Timestamp startDate;
+    private Timestamp endDate;
 }
 

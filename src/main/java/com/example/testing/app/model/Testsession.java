@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -29,25 +28,31 @@ public class Testsession {
     private String testsessionDescription;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    private Timestamp startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
+    private Timestamp endDate;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "test_id", nullable = false)
     private Test test;
 
     @Column(name = "creation_date", nullable = false)
-    private LocalDate creationDate;
+    private Timestamp creationDate;
 
     @Column(name = "last_change_date", nullable = false)
-    private LocalDate lastChangeDate;
+    private Timestamp lastChangeDate;
 
     @OneToMany(mappedBy = "testsession", cascade = CascadeType.ALL)
     private Set<Grade> grades = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "testsession", cascade = CascadeType.ALL)
     private Set<TestsessionResult> testsessionResults = new LinkedHashSet<>();
+
+    @Column(name = "questions_count")
+    private Integer questionsCount;
+
+    @Column(name = "testsession_time")
+    private Timestamp testsessionTime;
 
 }
